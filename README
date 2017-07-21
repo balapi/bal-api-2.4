@@ -1,0 +1,36 @@
+This repo contains the BAL API associated with BAL release specifed in the 
+file bal_version.h which is contained in this repo.  The file include/bal_version.h 
+shows the exact version of BAL and the API. These version numbers must match the 
+version of BAL which is run against this API.
+
+To build the example application, go to the example directory:
+
+  cd examples
+
+Then run make:
+
+  make
+
+Then execute the resulting application:
+
+  ./hello_bal
+
+
+You should see printouts that all of the function calls successfully executed:
+
+  bcmbal_init function successfully executed
+  bcmbal_subscribe_ind function successfully executed
+  bcmbal_cfg_set function successfully executed
+  bcmbal_cfg_get function successfully executed
+  bcmbal_stat_get function successfully executed
+  bcmbal_pkt_send to NNI function successfully executed
+  bcmbal_pkt_send to ONU function successfully executed
+  bcmbal_unsubscribe_ind function successfully executed
+  bcmbal_finish function successfully executed
+
+
+NOTE: The BAL API function provided herein are only stubs, and do not actually 
+perform any actual function.  The purpose of executing the calls is provide an 
+example of how to call the BAL API functions, and to validate that the files in
+this repo are coherent.
+
