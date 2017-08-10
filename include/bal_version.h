@@ -32,6 +32,6 @@
 
 #define BAL_MAJOR_VER      	02
 #define BAL_MINOR_VER      	04
-#define BAL_API_VERSION         4
+#define BAL_API_VERSION         7
 
 #endif  /* BAL_VERSION_H */

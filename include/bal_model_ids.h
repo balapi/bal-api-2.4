@@ -178,6 +178,10 @@ typedef enum bcmbal_interface_cfg_id
     BCMBAL_INTERFACE_CFG_ID_DS_TM                               = 8,    /**< Downstream scheduler and shaper. */
     BCMBAL_INTERFACE_CFG_ID_US_TM                               = 9,    /**< Upstream scheduler and shaper. */
     BCMBAL_INTERFACE_CFG_ID_SUB_TERM_ID_LIST                    = 10,   /**< Sub-term id list. */
+    BCMBAL_INTERFACE_CFG_ID_PON_DISTANCE                        = 11,   /**< pon_distance. */
+    BCMBAL_INTERFACE_CFG_ID_BER_MONITOR                         = 12,   /**< ber_monitor. */
+    BCMBAL_INTERFACE_CFG_ID_US_BANDWIDTH_LIMIT                  = 13,   /**< us_bandwidth_limit. */
+    BCMBAL_INTERFACE_CFG_ID_DS_FEC                              = 14,   /**< ds_fec. */
     BCMBAL_INTERFACE_CFG_ID__NUM_OF /**< Number of enum entries, not an entry itself. */
 } bcmbal_interface_cfg_id;
 
@@ -196,6 +200,10 @@ typedef enum bcmbal_interface_ind_id
     BCMBAL_INTERFACE_IND_ID_DS_TM                               = 8,    /**< Downstream scheduler and shaper. */
     BCMBAL_INTERFACE_IND_ID_US_TM                               = 9,    /**< Upstream scheduler and shaper. */
     BCMBAL_INTERFACE_IND_ID_SUB_TERM_ID_LIST                    = 10,   /**< Sub-term id list. */
+    BCMBAL_INTERFACE_IND_ID_PON_DISTANCE                        = 11,   /**< pon_distance. */
+    BCMBAL_INTERFACE_IND_ID_BER_MONITOR                         = 12,   /**< ber_monitor. */
+    BCMBAL_INTERFACE_IND_ID_US_BANDWIDTH_LIMIT                  = 13,   /**< us_bandwidth_limit. */
+    BCMBAL_INTERFACE_IND_ID_DS_FEC                              = 14,   /**< ds_fec. */
     BCMBAL_INTERFACE_IND_ID__NUM_OF /**< Number of enum entries, not an entry itself. */
 } bcmbal_interface_ind_id;
 
@@ -322,6 +330,7 @@ typedef enum bcmbal_subscriber_terminal_cfg_id
     BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_SVC_PORT_ID_LIST          = 9,    /**< svc_port_id list. */
     BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_AGG_PORT_ID_LIST          = 10,   /**< agg_port_id list. */
     BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_SUB_TERM_RATE             = 11,   /**< sub_term_rate. */
+    BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_US_FEC                    = 12,   /**< us_fec. */
     BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID__NUM_OF   /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_cfg_id;
 
@@ -333,6 +342,17 @@ typedef enum bcmbal_subscriber_terminal_dgi_id
     BCMBAL_SUBSCRIBER_TERMINAL_DGI_ID_DGI_STATUS                = 0,    /**< dgi_status. */
     BCMBAL_SUBSCRIBER_TERMINAL_DGI_ID__NUM_OF   /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_dgi_id;
+
+/** Identifiers for all properties contained in the subscriber_terminal_dowi 
+ * group. 
+ */
+typedef enum bcmbal_subscriber_terminal_dowi_id
+{
+    BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID_DOWI_STATUS              = 0,    /**< dowi_status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID_DRIFT_VALUE              = 1,    /**< drift_value. */
+    BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID_NEW_EQD                  = 2,    /**< new_eqd. */
+    BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID__NUM_OF  /**< Number of enum entries, not an entry itself. */
+} bcmbal_subscriber_terminal_dowi_id;
 
 /** Identifiers for all properties contained in the subscriber_terminal_ind 
  * group. 
@@ -351,6 +371,7 @@ typedef enum bcmbal_subscriber_terminal_ind_id
     BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_SVC_PORT_ID_LIST          = 9,    /**< svc_port_id list. */
     BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_AGG_PORT_ID_LIST          = 10,   /**< agg_port_id list. */
     BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_SUB_TERM_RATE             = 11,   /**< sub_term_rate. */
+    BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_US_EFC                    = 12,   /**< us_fec. */
     BCMBAL_SUBSCRIBER_TERMINAL_IND_ID__NUM_OF   /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_ind_id;
 
@@ -364,6 +385,15 @@ typedef enum bcmbal_subscriber_terminal_key_id
     BCMBAL_SUBSCRIBER_TERMINAL_KEY_ID__NUM_OF   /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_key_id;
 
+/** Identifiers for all properties contained in the subscriber_terminal_looci 
+ * group. 
+ */
+typedef enum bcmbal_subscriber_terminal_looci_id
+{
+    BCMBAL_SUBSCRIBER_TERMINAL_LOOCI_ID_LOOCI_STATUS            = 0,    /**< looci_status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_LOOCI_ID__NUM_OF /**< Number of enum entries, not an entry itself. */
+} bcmbal_subscriber_terminal_looci_id;
+
 /** Identifiers for all properties contained in the 
  * subscriber_terminal_oper_status_change group. 
  */
@@ -374,6 +404,26 @@ typedef enum bcmbal_subscriber_terminal_oper_status_change_id
     BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID_ADMIN_STATE    = 2,    /**< current admin state. */
     BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID__NUM_OF                /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_oper_status_change_id;
+
+/** Identifiers for all properties contained in the subscriber_terminal_sdi 
+ * group. 
+ */
+typedef enum bcmbal_subscriber_terminal_sdi_id
+{
+    BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID_SDI_STATUS                    = 0,    /**< sdi_status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID_BER                           = 1,    /**< ber. */
+    BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID__NUM_OF   /**< Number of enum entries, not an entry itself. */
+} bcmbal_subscriber_terminal_sdi_id;
+
+/** Identifiers for all properties contained in the subscriber_terminal_sfi 
+ * group. 
+ */
+typedef enum bcmbal_subscriber_terminal_sfi_id
+{
+    BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID_SFI_STATUS                    = 0,    /**< sfi_status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID_BER                           = 1,    /**< ber. */
+    BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID__NUM_OF   /**< Number of enum entries, not an entry itself. */
+} bcmbal_subscriber_terminal_sfi_id;
 
 /** Identifiers for all properties contained in the subscriber_terminal_stat 
  * group. 
@@ -404,6 +454,25 @@ typedef enum bcmbal_subscriber_terminal_sub_term_disc_id
     BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_DISC_ID_SERIAL_NUMBER       = 0,    /**< Serial number. */
     BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_DISC_ID__NUM_OF                     /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_sub_term_disc_id;
+
+/** Identifiers for all properties contained in the subscriber_terminal_sufi 
+ * group. 
+ */
+typedef enum bcmbal_subscriber_terminal_sufi_id
+{
+    BCMBAL_SUBSCRIBER_TERMINAL_SUFI_ID_SUFI_STATUS                  = 0,    /**< sufi_status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_SUFI_ID__NUM_OF  /**< Number of enum entries, not an entry itself. */
+} bcmbal_subscriber_terminal_sufi_id;
+
+/** Identifiers for all properties contained in the subscriber_terminal_tiwi 
+ * group. 
+ */
+typedef enum bcmbal_subscriber_terminal_tiwi_id
+{
+    BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID_TIWI_STATUS                  = 0,    /**< tiwi_status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID_DRIFT_VALUE                  = 1,    /**< drift_value. */
+    BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID__NUM_OF  /**< Number of enum entries, not an entry itself. */
+} bcmbal_subscriber_terminal_tiwi_id;
 
 /** Identifiers for all properties contained in the tm_queue_cfg group. 
  */
@@ -552,17 +621,23 @@ typedef enum bcmbal_obj_group_id
     BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_CFG                     = 24,   /**< BAL Subscriber Terminal - cfg */
     BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_STAT                    = 25,   /**< BAL Subscriber Terminal - stat */
     BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_DGI                     = 26,   /**< BAL Subscriber Terminal - Receive Dying-Gasp of subscriber terminal */
-    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_IND                     = 27,   /**< BAL Subscriber Terminal - Subscriber Terminal Indication */
-    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE      = 28,   /**< BAL Subscriber Terminal - Change of operational status */
-    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SUB_TERM_ALARM          = 29,   /**< BAL Subscriber Terminal - Subscriber Terminal Alarm Indication */
-    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SUB_TERM_DISC           = 30,   /**< BAL Subscriber Terminal - Subscriber Terminal Discovery Indication */
-    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_KEY                                = 31,   /**< tm_queue - key */
-    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_CFG                                = 32,   /**< tm_queue - cfg */
-    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_STAT                               = 33,   /**< tm_queue - stat */
-    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_IND                                = 34,   /**< tm_queue - tm queue indication */
-    BCMBAL_OBJ_GROUP_ID_TM_SCHED_KEY                                = 35,   /**< tm_sched - key */
-    BCMBAL_OBJ_GROUP_ID_TM_SCHED_CFG                                = 36,   /**< tm_sched - cfg */
-    BCMBAL_OBJ_GROUP_ID_TM_SCHED_IND                                = 37,   /**< tm_sched - Tm Sched Indication */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_DOWI                    = 27,   /**< BAL Subscriber Terminal - dowi */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_IND                     = 28,   /**< BAL Subscriber Terminal - Subscriber Terminal Indication */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_LOOCI                   = 29,   /**< BAL Subscriber Terminal - looci */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE      = 30,   /**< BAL Subscriber Terminal - Change of operational status */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SDI                     = 31,   /**< BAL Subscriber Terminal - sdi */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SFI                     = 32,   /**< BAL Subscriber Terminal - sfi */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SUB_TERM_ALARM          = 33,   /**< BAL Subscriber Terminal - Subscriber Terminal Alarm Indication */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SUB_TERM_DISC           = 34,   /**< BAL Subscriber Terminal - Subscriber Terminal Discovery Indication */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_SUFI                    = 35,   /**< BAL Subscriber Terminal - sufi */
+    BCMBAL_OBJ_GROUP_ID_SUBSCRIBER_TERMINAL_TIWI                    = 36,   /**< BAL Subscriber Terminal - tiwi */
+    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_KEY                                = 37,   /**< tm_queue - key */
+    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_CFG                                = 38,   /**< tm_queue - cfg */
+    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_STAT                               = 39,   /**< tm_queue - stat */
+    BCMBAL_OBJ_GROUP_ID_TM_QUEUE_IND                                = 40,   /**< tm_queue - tm queue indication */
+    BCMBAL_OBJ_GROUP_ID_TM_SCHED_KEY                                = 41,   /**< tm_sched - key */
+    BCMBAL_OBJ_GROUP_ID_TM_SCHED_CFG                                = 42,   /**< tm_sched - cfg */
+    BCMBAL_OBJ_GROUP_ID_TM_SCHED_IND                                = 43,   /**< tm_sched - Tm Sched Indication */
     BCMBAL_OBJ_GROUP_ID__NUM_OF /**< Number of enum entries, not an entry itself. */
 } bcmbal_obj_group_id;
 
@@ -623,11 +698,17 @@ typedef enum bcmbal_subscriber_terminal_auto_id
 {
     BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID__BEGIN,
     BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_DGI                          = 0,    /**< Receive Dying-Gasp of subscriber terminal. */
-    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_IND,                 /**< Subscriber Terminal Indication. */
-    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_OPER_STATUS_CHANGE,  /**< Change of operational status. */
-    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUB_TERM_ALARM,      /**< Subscriber Terminal Alarm Indication. */
-    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUB_TERM_DISC,       /**< Subscriber Terminal Discovery Indication. */
-    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID__NUM_OF              /**< Number of enum entries, not an entry itself. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_DOWI,                                /**< dowi. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_IND,                                 /**< Subscriber Terminal Indication. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_LOOCI,                               /**< looci. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_OPER_STATUS_CHANGE,                  /**< Change of operational status. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SDI,                                 /**< sdi. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SFI,                                 /**< sfi. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUB_TERM_ALARM,                      /**< Subscriber Terminal Alarm Indication. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUB_TERM_DISC,                       /**< Subscriber Terminal Discovery Indication. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUFI,                                /**< sufi. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_TIWI,                                /**< tiwi. */
+    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID__NUM_OF                              /**< Number of enum entries, not an entry itself. */
 } bcmbal_subscriber_terminal_auto_id;
 
 /** List of all tm_queue groups of type auto. 
@@ -679,6 +760,12 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_subscriber_terminal_sub_term_alarm_id_all_properties     BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_ALARM_ID__NUM_OF
 #define bcmbal_subscriber_terminal_oper_status_change_id_all_properties BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID__NUM_OF
 #define bcmbal_subscriber_terminal_dgi_id_all_properties                BCMBAL_SUBSCRIBER_TERMINAL_DGI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_looci_id_all_properties              BCMBAL_SUBSCRIBER_TERMINAL_LOOCI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_sufi_id_all_properties               BCMBAL_SUBSCRIBER_TERMINAL_SUFI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_sfi_id_all_properties                BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_sdi_id_all_properties                BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_tiwi_id_all_properties               BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_dowi_id_all_properties               BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID__NUM_OF
 #define bcmbal_tm_queue_key_id_all_properties                           BCMBAL_TM_QUEUE_KEY_ID__NUM_OF
 #define bcmbal_tm_queue_cfg_id_all_properties                           BCMBAL_TM_QUEUE_CFG_ID__NUM_OF
 #define bcmbal_tm_queue_stat_id_all_properties                          BCMBAL_TM_QUEUE_STAT_ID__NUM_OF
@@ -721,10 +808,16 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_packet_auto_id__num_of                                       BCMBAL_PACKET_AUTO_ID__NUM_OF
 #define bcmbal_subscriber_terminal_auto_id__begin                           BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID__BEGIN
 #define bcmbal_subscriber_terminal_auto_id_dgi                              BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_DGI
+#define bcmbal_subscriber_terminal_auto_id_dowi                             BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_DOWI
 #define bcmbal_subscriber_terminal_auto_id_ind                              BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_IND
+#define bcmbal_subscriber_terminal_auto_id_looci                            BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_LOOCI
 #define bcmbal_subscriber_terminal_auto_id_oper_status_change               BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_OPER_STATUS_CHANGE
+#define bcmbal_subscriber_terminal_auto_id_sdi                              BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SDI
+#define bcmbal_subscriber_terminal_auto_id_sfi                              BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SFI
 #define bcmbal_subscriber_terminal_auto_id_sub_term_alarm                   BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUB_TERM_ALARM
 #define bcmbal_subscriber_terminal_auto_id_sub_term_disc                    BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUB_TERM_DISC
+#define bcmbal_subscriber_terminal_auto_id_sufi                             BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_SUFI
+#define bcmbal_subscriber_terminal_auto_id_tiwi                             BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID_TIWI
 #define bcmbal_subscriber_terminal_auto_id__num_of                          BCMBAL_SUBSCRIBER_TERMINAL_AUTO_ID__NUM_OF
 #define bcmbal_tm_queue_auto_id__begin                                      BCMBAL_TM_QUEUE_AUTO_ID__BEGIN
 #define bcmbal_tm_queue_auto_id_ind                                         BCMBAL_TM_QUEUE_AUTO_ID_IND
@@ -825,6 +918,10 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_interface_cfg_id_ds_tm                                       BCMBAL_INTERFACE_CFG_ID_DS_TM
 #define bcmbal_interface_cfg_id_us_tm                                       BCMBAL_INTERFACE_CFG_ID_US_TM
 #define bcmbal_interface_cfg_id_sub_term_id_list                            BCMBAL_INTERFACE_CFG_ID_SUB_TERM_ID_LIST
+#define bcmbal_interface_cfg_id_pon_distance                                BCMBAL_INTERFACE_CFG_ID_PON_DISTANCE
+#define bcmbal_interface_cfg_id_ber_monitor                                 BCMBAL_INTERFACE_CFG_ID_BER_MONITOR
+#define bcmbal_interface_cfg_id_us_bandwidth_limit                          BCMBAL_INTERFACE_CFG_ID_US_BANDWIDTH_LIMIT
+#define bcmbal_interface_cfg_id_ds_fec                                      BCMBAL_INTERFACE_CFG_ID_DS_FEC
 #define bcmbal_interface_cfg_id__num_of                                     BCMBAL_INTERFACE_CFG_ID__NUM_OF
 #define bcmbal_interface_stat_id_rx_bytes                                   BCMBAL_INTERFACE_STAT_ID_RX_BYTES
 #define bcmbal_interface_stat_id_rx_packets                                 BCMBAL_INTERFACE_STAT_ID_RX_PACKETS
@@ -853,6 +950,10 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_interface_ind_id_ds_tm                                       BCMBAL_INTERFACE_IND_ID_DS_TM
 #define bcmbal_interface_ind_id_us_tm                                       BCMBAL_INTERFACE_IND_ID_US_TM
 #define bcmbal_interface_ind_id_sub_term_id_list                            BCMBAL_INTERFACE_IND_ID_SUB_TERM_ID_LIST
+#define bcmbal_interface_ind_id_pon_distance                                BCMBAL_INTERFACE_IND_ID_PON_DISTANCE
+#define bcmbal_interface_ind_id_ber_monitor                                 BCMBAL_INTERFACE_IND_ID_BER_MONITOR
+#define bcmbal_interface_ind_id_us_bandwidth_limit                          BCMBAL_INTERFACE_IND_ID_US_BANDWIDTH_LIMIT
+#define bcmbal_interface_ind_id_ds_fec                                      BCMBAL_INTERFACE_IND_ID_DS_FEC
 #define bcmbal_interface_ind_id__num_of                                     BCMBAL_INTERFACE_IND_ID__NUM_OF
 #define bcmbal_interface_los_id_status                                      BCMBAL_INTERFACE_LOS_ID_STATUS
 #define bcmbal_interface_los_id__num_of                                     BCMBAL_INTERFACE_LOS_ID__NUM_OF
@@ -898,6 +999,7 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_subscriber_terminal_cfg_id_svc_port_id_list                  BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_SVC_PORT_ID_LIST
 #define bcmbal_subscriber_terminal_cfg_id_agg_port_id_list                  BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_AGG_PORT_ID_LIST
 #define bcmbal_subscriber_terminal_cfg_id_sub_term_rate                     BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_SUB_TERM_RATE
+#define bcmbal_subscriber_terminal_cfg_id_us_fec                            BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID_US_FEC
 #define bcmbal_subscriber_terminal_cfg_id__num_of                           BCMBAL_SUBSCRIBER_TERMINAL_CFG_ID__NUM_OF
 #define bcmbal_subscriber_terminal_stat_id_rx_packets                       BCMBAL_SUBSCRIBER_TERMINAL_STAT_ID_RX_PACKETS
 #define bcmbal_subscriber_terminal_stat_id_rx_bytes                         BCMBAL_SUBSCRIBER_TERMINAL_STAT_ID_RX_BYTES
@@ -906,6 +1008,10 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_subscriber_terminal_stat_id__num_of                          BCMBAL_SUBSCRIBER_TERMINAL_STAT_ID__NUM_OF
 #define bcmbal_subscriber_terminal_dgi_id_dgi_status                        BCMBAL_SUBSCRIBER_TERMINAL_DGI_ID_DGI_STATUS
 #define bcmbal_subscriber_terminal_dgi_id__num_of                           BCMBAL_SUBSCRIBER_TERMINAL_DGI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_dowi_id_dowi_status                      BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID_DOWI_STATUS
+#define bcmbal_subscriber_terminal_dowi_id_drift_value                      BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID_DRIFT_VALUE
+#define bcmbal_subscriber_terminal_dowi_id_new_eqd                          BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID_NEW_EQD
+#define bcmbal_subscriber_terminal_dowi_id__num_of                          BCMBAL_SUBSCRIBER_TERMINAL_DOWI_ID__NUM_OF
 #define bcmbal_subscriber_terminal_ind_id_admin_state                       BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_ADMIN_STATE
 #define bcmbal_subscriber_terminal_ind_id_oper_status                       BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_OPER_STATUS
 #define bcmbal_subscriber_terminal_ind_id_serial_number                     BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_SERIAL_NUMBER
@@ -918,15 +1024,29 @@ typedef enum bcmbal_tm_sched_auto_id
 #define bcmbal_subscriber_terminal_ind_id_svc_port_id_list                  BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_SVC_PORT_ID_LIST
 #define bcmbal_subscriber_terminal_ind_id_agg_port_id_list                  BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_AGG_PORT_ID_LIST
 #define bcmbal_subscriber_terminal_ind_id_sub_term_rate                     BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_SUB_TERM_RATE
+#define bcmbal_subscriber_terminal_ind_id_us_efc                            BCMBAL_SUBSCRIBER_TERMINAL_IND_ID_US_EFC
 #define bcmbal_subscriber_terminal_ind_id__num_of                           BCMBAL_SUBSCRIBER_TERMINAL_IND_ID__NUM_OF
+#define bcmbal_subscriber_terminal_looci_id_looci_status                    BCMBAL_SUBSCRIBER_TERMINAL_LOOCI_ID_LOOCI_STATUS
+#define bcmbal_subscriber_terminal_looci_id__num_of                         BCMBAL_SUBSCRIBER_TERMINAL_LOOCI_ID__NUM_OF
 #define bcmbal_subscriber_terminal_oper_status_change_id_new_oper_status    BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID_NEW_OPER_STATUS
 #define bcmbal_subscriber_terminal_oper_status_change_id_old_oper_status    BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID_OLD_OPER_STATUS
 #define bcmbal_subscriber_terminal_oper_status_change_id_admin_state        BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID_ADMIN_STATE
 #define bcmbal_subscriber_terminal_oper_status_change_id__num_of            BCMBAL_SUBSCRIBER_TERMINAL_OPER_STATUS_CHANGE_ID__NUM_OF
+#define bcmbal_subscriber_terminal_sdi_id_sdi_status                        BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID_SDI_STATUS
+#define bcmbal_subscriber_terminal_sdi_id_ber                               BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID_BER
+#define bcmbal_subscriber_terminal_sdi_id__num_of                           BCMBAL_SUBSCRIBER_TERMINAL_SDI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_sfi_id_sfi_status                        BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID_SFI_STATUS
+#define bcmbal_subscriber_terminal_sfi_id_ber                               BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID_BER
+#define bcmbal_subscriber_terminal_sfi_id__num_of                           BCMBAL_SUBSCRIBER_TERMINAL_SFI_ID__NUM_OF
 #define bcmbal_subscriber_terminal_sub_term_alarm_id_alarm                  BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_ALARM_ID_ALARM
 #define bcmbal_subscriber_terminal_sub_term_alarm_id__num_of                BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_ALARM_ID__NUM_OF
 #define bcmbal_subscriber_terminal_sub_term_disc_id_serial_number           BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_DISC_ID_SERIAL_NUMBER
 #define bcmbal_subscriber_terminal_sub_term_disc_id__num_of                 BCMBAL_SUBSCRIBER_TERMINAL_SUB_TERM_DISC_ID__NUM_OF
+#define bcmbal_subscriber_terminal_sufi_id_sufi_status                      BCMBAL_SUBSCRIBER_TERMINAL_SUFI_ID_SUFI_STATUS
+#define bcmbal_subscriber_terminal_sufi_id__num_of                          BCMBAL_SUBSCRIBER_TERMINAL_SUFI_ID__NUM_OF
+#define bcmbal_subscriber_terminal_tiwi_id_tiwi_status                      BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID_TIWI_STATUS
+#define bcmbal_subscriber_terminal_tiwi_id_drift_value                      BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID_DRIFT_VALUE
+#define bcmbal_subscriber_terminal_tiwi_id__num_of                          BCMBAL_SUBSCRIBER_TERMINAL_TIWI_ID__NUM_OF
 #define bcmbal_tm_queue_key_id_sched_id                                     BCMBAL_TM_QUEUE_KEY_ID_SCHED_ID
 #define bcmbal_tm_queue_key_id_sched_dir                                    BCMBAL_TM_QUEUE_KEY_ID_SCHED_DIR
 #define bcmbal_tm_queue_key_id_id                                           BCMBAL_TM_QUEUE_KEY_ID_ID

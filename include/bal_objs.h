@@ -87,7 +87,6 @@ static inline char *bcmbal_objtype_str(bcmbal_obj_id obj)
  */
 #define _BCMBAL_REQ_INIT(_h, _obj, _grp, _subgrp) \
     (_h)->obj_init_val = BCMBAL_OBJ_INIT_VAL; \
-    (_h)->om_version = BAL_API_VERSION; \
     (_h)->status = BCM_ERR_OK; \
     (_h)->presence_mask = 0; \
     (_h)->obj_type = bcmbal_obj_id_ ## _obj; \
@@ -622,9 +621,9 @@ static inline void bcmbal_sub_term_object_overlay_w_src_priority(bcmbal_subscrib
         BCMBAL_CFG_PROP_SET(dstobj, subscriber_terminal, mac_address, srcobj->data.mac_address);
     }
 	
-    if(BCMBAL_CFG_PROP_IS_SET(srcobj, subscriber_terminal, sub_term_rate))
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, subscriber_terminal, us_fec))
     {
-        BCMBAL_CFG_PROP_SET(dstobj, subscriber_terminal, sub_term_rate, srcobj->data.sub_term_rate);
+        BCMBAL_CFG_PROP_SET(dstobj, subscriber_terminal, us_fec, srcobj->data.us_fec);
     }
 }
 
@@ -694,6 +693,12 @@ static inline void bcmbal_sub_term_object_overlay_w_dst_priority(bcmbal_subscrib
     {
         if(!BCMBAL_CFG_PROP_IS_SET(dstobj, subscriber_terminal, mac_address))
             BCMBAL_CFG_PROP_SET(dstobj, subscriber_terminal, mac_address, srcobj->data.mac_address);
+    }
+	
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, subscriber_terminal, us_fec))
+    {
+        if(!BCMBAL_CFG_PROP_IS_SET(dstobj, subscriber_terminal, us_fec))
+            BCMBAL_CFG_PROP_SET(dstobj, subscriber_terminal, us_fec, srcobj->data.us_fec);
     }
 }
 
@@ -1011,6 +1016,27 @@ static inline void bcmbal_interface_object_overlay_w_dst_priority(bcmbal_interfa
         if(!BCMBAL_CFG_PROP_IS_SET(dstobj, interface, us_tm))
             BCMBAL_CFG_PROP_SET(dstobj, interface, us_tm, srcobj->data.us_tm);
     }
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, pon_distance))
+    {
+        if(!BCMBAL_CFG_PROP_IS_SET(dstobj, interface, pon_distance))
+            BCMBAL_CFG_PROP_SET(dstobj, interface, pon_distance, srcobj->data.pon_distance);
+    }	
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, ber_monitor))
+    {
+        if(!BCMBAL_CFG_PROP_IS_SET(dstobj, interface, ber_monitor))
+            BCMBAL_CFG_PROP_SET(dstobj, interface, ber_monitor, srcobj->data.ber_monitor);
+    }	
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, us_bandwidth_limit))
+    {
+        if(!BCMBAL_CFG_PROP_IS_SET(dstobj, interface, us_bandwidth_limit))
+            BCMBAL_CFG_PROP_SET(dstobj, interface, us_bandwidth_limit, srcobj->data.us_bandwidth_limit);
+    }	
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, ds_fec))
+    {
+        if(!BCMBAL_CFG_PROP_IS_SET(dstobj, interface, ds_fec))
+            BCMBAL_CFG_PROP_SET(dstobj, interface, ds_fec, srcobj->data.ds_fec);
+    }	
+	
 }
 
 
@@ -1065,7 +1091,22 @@ static inline void bcmbal_interface_object_overlay_w_src_priority(bcmbal_interfa
     {
         BCMBAL_CFG_PROP_SET(dstobj, interface, us_tm, srcobj->data.us_tm);
     }
-
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, pon_distance))
+    {
+        BCMBAL_CFG_PROP_SET(dstobj, interface, pon_distance, srcobj->data.pon_distance);
+    }
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, ber_monitor))
+    {
+        BCMBAL_CFG_PROP_SET(dstobj, interface, ber_monitor, srcobj->data.ber_monitor);
+    }
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, us_bandwidth_limit))
+    {
+        BCMBAL_CFG_PROP_SET(dstobj, interface, us_bandwidth_limit, srcobj->data.us_bandwidth_limit);
+    }
+    if(BCMBAL_CFG_PROP_IS_SET(srcobj, interface, ds_fec))
+    {
+        BCMBAL_CFG_PROP_SET(dstobj, interface, ds_fec, srcobj->data.ds_fec);
+    }	
 }
 
 typedef union bcmbal_object_key

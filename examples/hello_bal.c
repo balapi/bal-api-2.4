@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     BCMBAL_CFG_INIT(&access_terminal_obj, access_terminal, access_terminal_key);
     BCMBAL_CFG_PROP_SET(&access_terminal_obj, access_terminal, admin_state, BCMBAL_STATE_UP);
     ret = bcmbal_cfg_set(access_term, BCMBAL_OBJ(&access_terminal_obj));
-        
+
     printf("bcmbal_cfg_set function %s\n", (BCM_ERR_OK == ret) ? "successfully executed" : "FAILED!");
 
     /*
@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
     ret = bcmbal_cfg_get(access_term, BCMBAL_OBJ(&access_terminal_obj));
 
     printf("bcmbal_cfg_get function %s\n", (BCM_ERR_OK == ret) ? "successfully executed" : "FAILED!");
-  
+
     /* Retrieve the NNI stats (rx_packets only) from the object instance */
 
     interface_key.intf_id = 1;  /* retrieve stats from interface NNI 1 */
@@ -108,10 +108,10 @@ int main(int argc, char *argv[])
     ret = bcmbal_stat_get(access_term, BCMBAL_OBJ(&interface_stat_obj), BCMOS_FALSE);
 
     printf("bcmbal_stat_get function %s\n", (BCM_ERR_OK == ret) ? "successfully executed" : "FAILED!");
- 
+
     /* Send the packet out to NNI interface 2 */
     destination.type =  BCMBAL_DEST_TYPE_NNI;
-    destination.u.nni.int_id = 2;
+    destination.u.nni.intf_id = 2;
 
     ret = bcmbal_pkt_send(access_term, destination, &user_pkt, user_pkt_size);
 
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
     /* Send the packet out to UNI 1 on ONU 2 on PON 1 */
     destination.type =  BCMBAL_DEST_TYPE_SUB_TERM;
     destination.u.sub_term.sub_term_id = 2;
-    destination.u.sub_term.int_id = 1;
+    destination.u.sub_term.intf_id = 1;
     destination.u.sub_term.sub_term_uni = 1;
 
     ret = bcmbal_pkt_send(access_term, destination, &user_pkt, user_pkt_size);

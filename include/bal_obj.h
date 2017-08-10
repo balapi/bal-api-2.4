@@ -19,8 +19,8 @@
 typedef struct bal_comm_msg_hdr
 {
     bcmos_msg        m;               /**< bcmos message header */
-    uint16_t         version_major;   /**< Header Major version number */
-    uint16_t         version_minor;   /**< Header Minor version number */
+    uint8_t          version_major;   /**< Header Major version number */
+    uint8_t          version_minor;   /**< Header Minor version number */
     bcmbal_msg_type  msg_type;        /**< Request / Response / Ack / Indication */
     uint32_t         msg_id;          /**< Message ID – the ID of the message (subID under the message type) */
     uint32_t         ex_id;           /**< Exchange ID for message tracking between endpoints */

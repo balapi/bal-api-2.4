@@ -502,6 +502,14 @@ typedef struct bcmbal_aggregation_port_id_list_u8
     bcmbal_aggregation_port_id *val;    /**< List contents. */
 } bcmbal_aggregation_port_id_list_u8;
 
+/** ber monitor parameters. 
+ */
+typedef struct bcmbal_ber_monitor_params
+{
+    uint8_t sf_threshold;   /**< Signal fail alarm is raised when BER raises to 10^-x, where x is this number. */
+    uint8_t sd_threshold;   /**< Signal degrade alarm is raised when BER raises to 10^-x, where x is this number. */
+} bcmbal_ber_monitor_params;
+
 /** classifier. 
  */
 typedef struct bcmbal_classifier
@@ -533,32 +541,32 @@ typedef struct bcmbal_dest
     {
         struct
         {
-            bcmbal_intf_id int_id;      /**< Interface ID. */
+            bcmbal_intf_id intf_id;     /**< Interface ID. */
         } nni;
 
         struct
         {
             bcmbal_sub_id sub_term_id;  /**< Subscriber terminal ID. */
             uint16_t sub_term_uni;      /**< Subscriber terminal UNI. */
-            uint16_t int_id;            /**< Interface ID. */
+            bcmbal_intf_id intf_id;     /**< Interface ID. */
         } sub_term;
 
         struct
         {
-            bcmbal_service_port_id svc_port_id; /**< GEM ID or LLID. */
-            uint16_t int_id;                    /**< Interface ID. */
+            bcmbal_service_port_id svc_port_id; /**< Service Port ID. */
+            bcmbal_intf_id intf_id;             /**< Interface ID. */
         } svc_port;
 
         struct
         {
             bcmbal_sub_id sub_term_id;          /**< Subscriber terminal ID. */
-            uint16_t int_id;                    /**< Interface ID. */
+            bcmbal_intf_id intf_id;             /**< Interface ID. */
         } itu_omci_channel;
 
         struct
         {
             bcmos_mac_address mac_address;      /**< MAC address for this link. */
-            uint16_t int_id;                    /**< Interface ID. */
+            bcmbal_intf_id intf_id;             /**< Interface ID. */
         } ieee_oam_channel;
     } u;
 } bcmbal_dest;
@@ -630,6 +638,14 @@ typedef struct bcmbal_password
 {
     uint8_t arr[10];    /**< Array. */
 } bcmbal_password;
+
+/** pon_distance. 
+ */
+typedef struct bcmbal_pon_distance
+{
+    uint32_t max_log_distance;  /**< Max logical distance of a subscriber termainal on the interface */
+    uint32_t max_diff_reach;    /**< Max distance between the closest and farthest subscriber terminal */
+} bcmbal_pon_distance;
 
 /** Registration id. 
  */
@@ -766,14 +782,14 @@ typedef struct bcmbal_tm_sched_owner
         struct
         {
             bcmbal_tm_sched_owner_agg_port_id presence_mask;    /**< Presence Mask. */
-            uint8_t intf_id;                        /**< PON interface id */
+            bcmbal_intf_id intf_id;                 /**< PON interface id */
             bcmbal_sub_id sub_term_id;              /**< Subscriber terminal id */
             bcmbal_aggregation_port_id agg_port_id; /**< Aggregation port id */
         } agg_port;
 
         struct
         {
-            uint8_t intf_id;                        /**< PON interface id */
+            bcmbal_intf_id intf_id;                 /**< PON interface id */
             bcmbal_sub_id sub_term_id;              /**< Subscriber terminal id */
             uint8_t idx;    /**< Index at subscriber terminal */
         } uni;
@@ -809,12 +825,12 @@ typedef struct bcmbal_tm_shaping
  */
 typedef struct bcmbal_topology
 {
-    uint32_t num_of_nni_ports;          /**< The number of nni ports for the access_terminal */
-    uint32_t num_of_pon_ports;          /**< The number of pon ports for the access_terminal */
-    uint32_t num_of_mac_devs;           /**< The number of mac devices associated with this access_terminal */
-    uint32_t num_of_pons_per_mac_dev;   /**< The number of pon ports per mac device in this access_terminal */
-    uint16_t pon_family;                /**< The PON family for the access_terminal */
-    uint16_t pon_sub_family;            /**< The PON sub-family for the access_terminal */
+    uint32_t num_of_nni_ports;              /**< The number of nni ports for the access_terminal */
+    uint32_t num_of_pon_ports;              /**< The number of pon ports for the access_terminal */
+    uint32_t num_of_mac_devs;               /**< The number of mac devices associated with this access_terminal */
+    uint32_t num_of_pons_per_mac_dev;       /**< The number of pon ports per mac device in this access_terminal */
+    bcmbal_pon_family pon_family;           /**< The PON family for the access_terminal */
+    bcmbal_pon_sub_family pon_sub_family;   /**< The PON sub-family for the access_terminal */
 } bcmbal_topology;
 
 /** Variable-length list of U8. 
@@ -1057,7 +1073,7 @@ typedef struct bcmbal_group_ind
  */
 typedef struct bcmbal_interface_key
 {
-    uint32_t intf_id;           /**< intf_id. */
+    bcmbal_intf_id intf_id;     /**< intf_id. */
     bcmbal_intf_type intf_type; /**< intf_type. */
 } bcmbal_interface_key;
 
@@ -1076,6 +1092,10 @@ typedef struct bcmbal_interface_cfg_data
     bcmbal_tm_sched_id ds_tm;       /**< Downstream scheduler and shaper */
     bcmbal_tm_sched_id us_tm;       /**< Upstream scheduler and shaper */
     bcmbal_sub_id_list_u16 sub_term_id_list;    /**< A list of subscriber terminal ids configured on this interface */
+    bcmbal_pon_distance pon_distance;           /**< pon inetrface distance parameters */
+    bcmbal_ber_monitor_params ber_monitor;      /**< BER monitor process configuration */
+    uint32_t us_bandwidth_limit;                /**< us_bandwidth_limit. */
+    bcmbal_control ds_fec;                      /**< enable/disable  ds fec (gpon only) */
 } bcmbal_interface_cfg_data;
 
 /** Transport message definition for "cfg" group of "interface" object. 
@@ -1132,6 +1152,10 @@ typedef struct bcmbal_interface_ind_data
     bcmbal_tm_sched_id ds_tm;       /**< Downstream scheduler and shaper */
     bcmbal_tm_sched_id us_tm;       /**< Upstream scheduler and shaper */
     bcmbal_sub_id_list_u16 sub_term_id_list;    /**< A list of subscriber terminal ids configured on this interface */
+    bcmbal_pon_distance pon_distance;           /**< pon_distance. */
+    bcmbal_ber_monitor_params ber_monitor;      /**< ber_monitor. */
+    uint32_t us_bandwidth_limit;                /**< us_bandwidth_limit. */
+    bcmbal_control ds_fec;                      /**< enable/disable  ds fec (gpon only) */
 } bcmbal_interface_ind_data;
 
 /** Transport message definition for "ind" group of "interface" object. 
@@ -1303,6 +1327,7 @@ typedef struct bcmbal_subscriber_terminal_cfg_data
     bcmbal_service_port_id_list_u8 svc_port_id_list;        /**< A list of bearer traffic svc_port_ids associated with this subscriber terminal */
     bcmbal_aggregation_port_id_list_u8 agg_port_id_list;    /**< A list of aggr_port_ids associated with this subscriber terminal */
     bcmbal_sub_term_rate sub_term_rate;                     /**< sub_term_rate. */
+    bcmbal_control us_fec;  /**< enable/disable us fec */
 } bcmbal_subscriber_terminal_cfg_data;
 
 /** Transport message definition for "cfg" group of "subscriber_terminal" 
@@ -1354,6 +1379,28 @@ typedef struct bcmbal_subscriber_terminal_dgi
     bcmbal_subscriber_terminal_dgi_data data;   /**< All properties that must be set by the user. */
 } bcmbal_subscriber_terminal_dgi;
 
+/** Structure definition for the "dowi" group of the "subscriber_terminal" 
+ * object. 
+ *
+ * drift of window 
+ */
+typedef struct bcmbal_subscriber_terminal_dowi_data
+{
+    bcmbal_alarm_status dowi_status;    /**< dowi alarm status */
+    uint32_t drift_value;               /**< Calculated amount of drift (positive + negative as a signed value). */
+    uint32_t new_eqd;                   /**< New EQD after drift is corrected (only valid if status is 'on').  */
+} bcmbal_subscriber_terminal_dowi_data;
+
+/** Transport message definition for "dowi" group of "subscriber_terminal" 
+ * object. 
+ */
+typedef struct bcmbal_subscriber_terminal_dowi
+{
+    bcmbal_auto hdr;                    /**< Transport header. */
+    bcmbal_subscriber_terminal_key key; /**< Object key. */
+    bcmbal_subscriber_terminal_dowi_data data;  /**< All properties that must be set by the user. */
+} bcmbal_subscriber_terminal_dowi;
+
 /** Structure definition for the "ind" group of the "subscriber_terminal" 
  * object. 
  */
@@ -1371,6 +1418,7 @@ typedef struct bcmbal_subscriber_terminal_ind_data
     bcmbal_service_port_id_list_u8 svc_port_id_list;        /**< A list of bearer traffic svc_port_ids associated with this subscriber terminal */
     bcmbal_aggregation_port_id_list_u8 agg_port_id_list;    /**< A list of aggr_port_ids associated with this subscriber terminal */
     bcmbal_sub_term_rate sub_term_rate;                     /**< sub_term_rate. */
+    bcmbal_control us_efc;  /**< us_fec. */
 } bcmbal_subscriber_terminal_ind_data;
 
 /** Transport message definition for "ind" group of "subscriber_terminal" 
@@ -1382,6 +1430,26 @@ typedef struct bcmbal_subscriber_terminal_ind
     bcmbal_subscriber_terminal_key key; /**< Object key. */
     bcmbal_subscriber_terminal_ind_data data;   /**< All properties that must be set by the user. */
 } bcmbal_subscriber_terminal_ind;
+
+/** Structure definition for the "looci" group of the "subscriber_terminal" 
+ * object. 
+ *
+ * loss of omci channel 
+ */
+typedef struct bcmbal_subscriber_terminal_looci_data
+{
+    bcmbal_alarm_status looci_status;   /**< status of loocs alarm */
+} bcmbal_subscriber_terminal_looci_data;
+
+/** Transport message definition for "looci" group of "subscriber_terminal" 
+ * object. 
+ */
+typedef struct bcmbal_subscriber_terminal_looci
+{
+    bcmbal_auto hdr;                    /**< Transport header. */
+    bcmbal_subscriber_terminal_key key; /**< Object key. */
+    bcmbal_subscriber_terminal_looci_data data; /**< All properties that must be set by the user. */
+} bcmbal_subscriber_terminal_looci;
 
 /** Structure definition for the "oper_status_change" group of the 
  * "subscriber_terminal" object. 
@@ -1404,6 +1472,48 @@ typedef struct bcmbal_subscriber_terminal_oper_status_change
     bcmbal_subscriber_terminal_key key; /**< Object key. */
     bcmbal_subscriber_terminal_oper_status_change_data data;    /**< All properties that must be set by the user. */
 } bcmbal_subscriber_terminal_oper_status_change;
+
+/** Structure definition for the "sdi" group of the "subscriber_terminal" 
+ * object. 
+ *
+ * signal degraded 
+ */
+typedef struct bcmbal_subscriber_terminal_sdi_data
+{
+    bcmbal_alarm_status sdi_status; /**< sdi alarm status */
+    uint32_t ber;                   /**<  Inverse bit error rate (e.g. if this number is 1000, the BER is 1/1000). */
+} bcmbal_subscriber_terminal_sdi_data;
+
+/** Transport message definition for "sdi" group of "subscriber_terminal" 
+ * object. 
+ */
+typedef struct bcmbal_subscriber_terminal_sdi
+{
+    bcmbal_auto hdr;                    /**< Transport header. */
+    bcmbal_subscriber_terminal_key key; /**< Object key. */
+    bcmbal_subscriber_terminal_sdi_data data;   /**< All properties that must be set by the user. */
+} bcmbal_subscriber_terminal_sdi;
+
+/** Structure definition for the "sfi" group of the "subscriber_terminal" 
+ * object. 
+ *
+ * signal fail 
+ */
+typedef struct bcmbal_subscriber_terminal_sfi_data
+{
+    bcmbal_alarm_status sfi_status; /**< sfi alarm status */
+    uint32_t ber;                   /**<  Inverse bit error rate (e.g. if this number is 1000, the BER is 1/1000). */
+} bcmbal_subscriber_terminal_sfi_data;
+
+/** Transport message definition for "sfi" group of "subscriber_terminal" 
+ * object. 
+ */
+typedef struct bcmbal_subscriber_terminal_sfi
+{
+    bcmbal_auto hdr;                    /**< Transport header. */
+    bcmbal_subscriber_terminal_key key; /**< Object key. */
+    bcmbal_subscriber_terminal_sfi_data data;   /**< All properties that must be set by the user. */
+} bcmbal_subscriber_terminal_sfi;
 
 /** Structure definition for the "sub_term_alarm" group of the 
  * "subscriber_terminal" object. 
@@ -1440,6 +1550,47 @@ typedef struct bcmbal_subscriber_terminal_sub_term_disc
     bcmbal_subscriber_terminal_key key; /**< Object key. */
     bcmbal_subscriber_terminal_sub_term_disc_data data; /**< All properties that must be set by the user. */
 } bcmbal_subscriber_terminal_sub_term_disc;
+
+/** Structure definition for the "sufi" group of the "subscriber_terminal" 
+ * object. 
+ *
+ * start up failure 
+ */
+typedef struct bcmbal_subscriber_terminal_sufi_data
+{
+    bcmbal_alarm_status sufi_status;    /**< sufi alarm status */
+} bcmbal_subscriber_terminal_sufi_data;
+
+/** Transport message definition for "sufi" group of "subscriber_terminal" 
+ * object. 
+ */
+typedef struct bcmbal_subscriber_terminal_sufi
+{
+    bcmbal_auto hdr;                    /**< Transport header. */
+    bcmbal_subscriber_terminal_key key; /**< Object key. */
+    bcmbal_subscriber_terminal_sufi_data data;  /**< All properties that must be set by the user. */
+} bcmbal_subscriber_terminal_sufi;
+
+/** Structure definition for the "tiwi" group of the "subscriber_terminal" 
+ * object. 
+ *
+ * transmission interference 
+ */
+typedef struct bcmbal_subscriber_terminal_tiwi_data
+{
+    bcmbal_alarm_status tiwi_status;    /**< tiwi alarm status */
+    uint32_t drift_value;               /**<  Calculated amount of drift (positive + negative as a signed value). */
+} bcmbal_subscriber_terminal_tiwi_data;
+
+/** Transport message definition for "tiwi" group of "subscriber_terminal" 
+ * object. 
+ */
+typedef struct bcmbal_subscriber_terminal_tiwi
+{
+    bcmbal_auto hdr;                    /**< Transport header. */
+    bcmbal_subscriber_terminal_key key; /**< Object key. */
+    bcmbal_subscriber_terminal_tiwi_data data;  /**< All properties that must be set by the user. */
+} bcmbal_subscriber_terminal_tiwi;
 
 /** Structure definition for the "key" group of the "tm_queue" object. 
  */
